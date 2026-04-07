@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.techtonicinnovations.com/sitemap.xml
+
+# LLM-readable summary
+# See: https://www.techtonicinnovations.com/llms.txt
