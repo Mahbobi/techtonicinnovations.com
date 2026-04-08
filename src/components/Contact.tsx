@@ -1,6 +1,8 @@
 import { useRef, useState, type FormEvent } from "react";
 import { motion, useInView } from "framer-motion";
-import { Send, CheckCircle2, Mail, Phone, MapPin } from "lucide-react";
+import { Send, CheckCircle2, Mail, Phone, MapPin, Loader2, AlertCircle } from "lucide-react";
+
+const WEB3FORMS_ACCESS_KEY = "704ca11a-48a8-4d4b-a584-fd4c8ea6d469";
 
 const contactInfo = [
   { icon: Mail, label: "info@techtonicinnovations.com" },
@@ -12,11 +14,53 @@ export function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    service: "",
+    message: "",
+  });
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `New inquiry from ${formData.name} \u2014 ${formData.service}`,
+          from_name: "TechTonic Innovations Website",
+          name: formData.name,
+          email: formData.email,
+          service: formData.service,
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", service: "", message: "" });
+        setTimeout(() => setSubmitted(false), 4000);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputClasses =
@@ -82,35 +126,56 @@ export function Contact() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <input
                     type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder="Your Name"
                     required
                     className={inputClasses}
                   />
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="Email Address"
                     required
                     className={inputClasses}
                   />
                 </div>
-                <select className={inputClasses + " appearance-none"} required>
+                <select
+                  name="service"
+                  value={formData.service}
+                  onChange={handleChange}
+                  className={inputClasses + " appearance-none"}
+                  required
+                >
                   <option value="" className="bg-card">Select a Service</option>
-                  <option value="ai" className="bg-card">AI Solution Engineering</option>
-                  <option value="talent" className="bg-card">Elite Tech Talent</option>
-                  <option value="web" className="bg-card">Web Platform Development</option>
-                  <option value="product" className="bg-card">Intelligent Software Products</option>
+                  <option value="AI Solution Engineering" className="bg-card">AI Solution Engineering</option>
+                  <option value="Elite Tech Talent" className="bg-card">Elite Tech Talent</option>
+                  <option value="Web Platform Development" className="bg-card">Web Platform Development</option>
+                  <option value="Intelligent Software Products" className="bg-card">Intelligent Software Products</option>
                 </select>
                 <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Tell us about your project..."
                   rows={5}
                   required
                   className={inputClasses + " resize-none"}
                 />
+                {error && (
+                  <div className="flex items-center gap-2 text-red-400 text-sm">
+                    <AlertCircle className="w-4 h-4" />
+                    {error}
+                  </div>
+                )}
                 <motion.button
                   type="submit"
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  disabled={submitted}
+                  disabled={submitted || loading}
                   className={`w-full py-4 rounded-xl font-semibold text-white flex items-center justify-center gap-2 transition-all duration-300 ${
                     submitted
                       ? "bg-neon-emerald shadow-lg shadow-neon-emerald/25"
@@ -121,6 +186,11 @@ export function Contact() {
                     <>
                       <CheckCircle2 className="w-5 h-5" />
                       Message Sent!
+                    </>
+                  ) : loading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Sending...
                     </>
                   ) : (
                     <>
