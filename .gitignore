@@ -26,3 +26,4 @@ dist-ssr
 # Local-only (not for production)
 CLAUDE-FABLE-5.md
 _backup/
+.eslintcache
