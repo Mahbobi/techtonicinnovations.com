@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local-only (not for production)
+CLAUDE-FABLE-5.md
+_backup/

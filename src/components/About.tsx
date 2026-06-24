@@ -3,107 +3,95 @@ import { motion, useInView } from "framer-motion";
 import { Rocket, Shield, Lightbulb, BarChart3 } from "lucide-react";
 
 const features = [
-  { icon: Rocket, text: "5x Faster Deployment Cycles" },
+  { icon: Rocket, text: "5× Faster Deployment Cycles" },
   { icon: Shield, text: "Enterprise-Grade Security" },
   { icon: Lightbulb, text: "AI-First Architecture" },
   { icon: BarChart3, text: "Data-Driven Decision Making" },
 ];
 
+const metrics = [
+  { value: "5×", label: "Faster deploy", accent: "text-acid" },
+  { value: "24/7", label: "AI monitoring", accent: "text-azure" },
+  { value: "98%", label: "Satisfaction", accent: "text-flux" },
+  { value: "6 wk", label: "Avg. to launch", accent: "text-ember" },
+];
+
 export function About() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="relative py-32 px-6 overflow-hidden" ref={ref}>
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon-purple/8 rounded-full blur-[150px] pointer-events-none" />
+    <section id="about" ref={ref} className="section-pad relative overflow-hidden">
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[60vw] max-h-[640px] w-[60vw] max-w-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-flux/10 blur-[150px]" />
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        {/* Left — 3D visual */}
+      <div className="shell grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        {/* Left — editorial copy */}
         <motion.div
-          initial={{ opacity: 0, x: -60 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="relative flex items-center justify-center"
+          className="lg:col-span-7"
         >
-          {/* Morphing shape */}
-          <div className="relative w-72 h-72 md:w-96 md:h-96">
-            <div className="absolute inset-0 morph-shape bg-gradient-to-br from-neon-cyan/30 to-neon-purple/30 blur-sm" />
-            <div className="absolute inset-4 morph-shape bg-gradient-to-br from-neon-cyan/15 to-neon-purple/15" style={{ animationDelay: "-2s" }} />
-
-            {/* Orbit ring */}
-            <div className="absolute inset-[-20px] border border-dashed border-white/10 rounded-full orbit-ring">
-              <div className="absolute -top-1.5 left-1/2 w-3 h-3 rounded-full bg-neon-cyan shadow-lg shadow-neon-cyan/50" />
-            </div>
-            <div className="absolute inset-[-50px] border border-dashed border-white/5 rounded-full orbit-ring-reverse">
-              <div className="absolute -bottom-1.5 right-1/4 w-2.5 h-2.5 rounded-full bg-neon-purple shadow-lg shadow-neon-purple/50" />
-            </div>
-
-            {/* Center content */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-5xl font-heading font-bold gradient-text">AI</div>
-                <div className="text-sm text-slate-400 mt-1">Powered</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Floating metric cards */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="absolute -top-4 -right-4 md:top-4 md:right-0 glass rounded-xl px-4 py-3 float-1"
-          >
-            <div className="text-lg font-bold text-neon-cyan">5x</div>
-            <div className="text-xs text-slate-400">Faster Deploy</div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.6, duration: 0.5 }}
-            className="absolute -bottom-4 -left-4 md:bottom-8 md:left-0 glass rounded-xl px-4 py-3 float-2"
-          >
-            <div className="text-lg font-bold text-neon-emerald">24/7</div>
-            <div className="text-xs text-slate-400">AI Monitoring</div>
-          </motion.div>
-        </motion.div>
-
-        {/* Right — Content */}
-        <motion.div
-          initial={{ opacity: 0, x: 60 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <span className="inline-block text-sm font-medium text-neon-cyan mb-4 tracking-wider uppercase">
-            Why TechTonic Innovations
-          </span>
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-            Engineering the Future,{" "}
-            <span className="gradient-text-warm">Today</span>
+          <p className="eyebrow mb-5">Why TechTonic</p>
+          <h2 className="font-display text-h1 font-extrabold uppercase leading-[0.95] text-bone">
+            Engineering the future,{" "}
+            <span className="font-serif-accent text-h1 font-normal normal-case italic text-acid">
+              today
+            </span>
           </h2>
-          <p className="text-slate-400 text-lg leading-relaxed mb-8">
+          <p className="mt-7 max-w-xl text-lg leading-relaxed text-ash">
             We combine deep technical expertise with strategic thinking to deliver
             software that doesn't just work — it transforms. Our AI-first approach
             means every solution is built to learn, adapt, and scale.
           </p>
 
-          {/* Feature list */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {features.map((feature, i) => (
-              <motion.div
-                key={feature.text}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.4 + i * 0.1, duration: 0.5 }}
-                className="flex items-center gap-3 glass rounded-xl p-4 hover:bg-white/8 transition-colors duration-300"
-              >
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neon-cyan/15 to-neon-purple/15 flex items-center justify-center shrink-0">
-                  <feature.icon className="w-5 h-5 text-neon-cyan" />
+          <div className="mt-9 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {features.map((f, i) => {
+              const Icon = f.icon;
+              return (
+                <motion.div
+                  key={f.text}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.3 + i * 0.08, duration: 0.5 }}
+                  className="lift flex items-center gap-3 rounded-2xl border border-line bg-surface/60 p-4"
+                >
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/5">
+                    <Icon className="h-5 w-5 text-acid" strokeWidth={1.5} />
+                  </span>
+                  <span className="text-sm font-medium text-bone-dim">{f.text}</span>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* Right — metric stack with rotating accent ring */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={inView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative lg:col-span-5"
+        >
+          <div className="relative mx-auto aspect-square w-full max-w-sm">
+            <div className="spin-slow absolute inset-0 rounded-full border border-dashed border-line">
+              <span className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-acid shadow-[0_0_20px] shadow-acid" />
+            </div>
+            <div className="spin-slow absolute inset-8 rounded-full border border-dashed border-line/60" style={{ animationDirection: "reverse" }}>
+              <span className="absolute bottom-0 right-6 h-2.5 w-2.5 rounded-full bg-flux shadow-[0_0_16px] shadow-flux" />
+            </div>
+            <div className="absolute inset-0 grid grid-cols-2 place-items-center gap-2 p-10">
+              {metrics.map((m) => (
+                <div key={m.label} className="text-center">
+                  <div className={`font-display text-3xl font-extrabold sm:text-4xl ${m.accent}`}>
+                    {m.value}
+                  </div>
+                  <div className="mt-1 text-[11px] uppercase tracking-wider text-ash">
+                    {m.label}
+                  </div>
                 </div>
-                <span className="text-sm font-medium text-slate-200">{feature.text}</span>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

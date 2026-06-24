@@ -1,14 +1,16 @@
-import { motion } from "framer-motion";
-import { ArrowRight, Brain, Users, Globe } from "lucide-react";
+import { lazy, Suspense, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import { useCountUp } from "../hooks/useCountUp";
-import { ParticleBackground } from "./ParticleBackground";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import { MagneticButton } from "./MagneticButton";
+import { KineticText } from "./KineticText";
+import { GridLines, RotatingBadge, ScrollIndicator } from "./HeroDecor";
 
-const floatingCards = [
-  { icon: Brain, label: "AI Integration", className: "float-1 top-[20%] left-[5%] lg:left-[8%]" },
-  { icon: Users, label: "Talent Placement", className: "float-2 top-[30%] right-[5%] lg:right-[8%]" },
-  { icon: Globe, label: "Web Platforms", className: "float-3 bottom-[25%] left-[10%] lg:left-[15%]" },
-];
+const HeroScene = lazy(() =>
+  import("../three/HeroScene").then((m) => ({ default: m.HeroScene }))
+);
 
 const stats = [
   { value: 200, suffix: "+", label: "Projects Delivered" },
@@ -17,130 +19,136 @@ const stats = [
   { value: 15, suffix: "+", label: "AI Models Deployed" },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.3 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } },
-};
-
 function StatItem({ value, suffix, label }: { value: number; suffix: string; label: string }) {
-  const { ref, isVisible } = useScrollAnimation(0.5);
+  const { ref, isVisible } = useScrollAnimation(0.4);
   const count = useCountUp(value, isVisible);
-
   return (
-    <div ref={ref} className="text-center">
-      <div className="text-3xl md:text-4xl font-heading font-bold text-white">
+    <div ref={ref}>
+      <div className="font-display text-3xl font-bold text-bone sm:text-4xl">
         {count}
-        <span className="gradient-text">{suffix}</span>
+        <span className="text-acid">{suffix}</span>
       </div>
-      <div className="text-sm text-slate-400 mt-1">{label}</div>
+      <div className="mt-1 text-xs text-ash sm:text-sm">{label}</div>
+    </div>
+  );
+}
+
+/** Static, GPU-free fallback for reduced-motion users and Suspense loading. */
+function HeroPoster() {
+  return (
+    <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+      <div className="drift-1 absolute top-[8%] right-[6%] h-[42vw] max-h-[560px] w-[42vw] max-w-[560px] rounded-full bg-flux/25 blur-[120px]" />
+      <div className="drift-2 absolute bottom-[6%] left-[2%] h-[34vw] max-h-[460px] w-[34vw] max-w-[460px] rounded-full bg-acid/15 blur-[120px]" />
+      <div className="absolute top-1/2 left-1/2 h-[30vw] max-h-[380px] w-[30vw] max-w-[380px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-azure/10 blur-[100px]" />
     </div>
   );
 }
 
 export function Hero() {
+  const reduced = usePrefersReducedMotion();
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.96]);
+  const parallax = reduced ? {} : { y, opacity, scale };
+
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background glows */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="glow-1 absolute -top-[10%] right-[10%] w-[500px] h-[500px] rounded-full bg-neon-cyan/15 blur-[120px]" />
-        <div className="glow-2 absolute bottom-[10%] -left-[5%] w-[400px] h-[400px] rounded-full bg-neon-purple/15 blur-[100px]" />
-        <div className="glow-3 absolute top-[40%] left-[40%] w-[300px] h-[300px] rounded-full bg-neon-emerald/10 blur-[80px]" />
+    <section
+      id="hero"
+      ref={containerRef}
+      className="relative flex min-h-[100svh] items-center overflow-hidden pt-28 pb-16"
+    >
+      {/* 3D scene / poster (full-bleed background) */}
+      <div className="absolute inset-0 z-0">
+        {reduced ? (
+          <HeroPoster />
+        ) : (
+          <Suspense fallback={<HeroPoster />}>
+            <HeroScene />
+          </Suspense>
+        )}
       </div>
 
-      {/* Particle canvas */}
-      <div className="absolute inset-0">
-        <ParticleBackground />
-      </div>
+      <GridLines />
 
-      {/* Floating cards (desktop) */}
-      <div className="hidden lg:block">
-        {floatingCards.map((card, i) => (
-          <div
-            key={i}
-            className={`absolute z-10 ${card.className}`}
-          >
-            <div className="glass rounded-2xl px-5 py-4 flex items-center gap-3 hover:bg-white/10 transition-colors duration-300">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 flex items-center justify-center">
-                <card.icon className="w-5 h-5 text-neon-cyan" />
-              </div>
-              <span className="text-sm font-medium text-white">{card.label}</span>
-            </div>
-          </div>
-        ))}
-      </div>
+      {/* readability scrim */}
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-ink/40 via-ink/10 to-ink" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-40 bg-gradient-to-t from-ink to-transparent" />
 
-      {/* Hero content */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-20 max-w-4xl mx-auto px-6 text-center"
-      >
-        {/* Badge */}
-        <motion.div variants={itemVariants} className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-8">
-          <span className="w-2 h-2 rounded-full bg-neon-emerald pulse-dot" />
-          <span className="text-sm text-slate-300">Now Accepting New Projects for 2026</span>
-        </motion.div>
+      <RotatingBadge />
 
-        {/* Title */}
-        <motion.h1
-          variants={itemVariants}
-          className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6"
-        >
-          We Build{" "}
-          <span className="gradient-text">Intelligent</span>
-          <br />
-          Software Solutions
-        </motion.h1>
-
-        {/* Subtitle */}
+      {/* Content — wrapper passes pointer events through so the blob still reacts */}
+      <motion.div style={parallax} className="pointer-events-none relative z-10 shell w-full">
         <motion.p
-          variants={itemVariants}
-          className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="eyebrow mb-7 flex items-center gap-3"
         >
-          AI-powered engineering, elite tech talent, and custom platforms designed to
-          accelerate your business into the future.
+          <span className="inline-block h-2 w-2 rounded-full bg-acid pulse-dot" />
+          Now accepting projects for 2026
         </motion.p>
 
-        {/* CTAs */}
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.03, y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-neon-cyan to-neon-purple text-white font-semibold shadow-lg shadow-neon-cyan/25 hover:shadow-neon-cyan/40 transition-shadow duration-300"
-          >
-            Start Your Project
-            <ArrowRight className="w-4 h-4" />
-          </motion.a>
-          <motion.a
-            href="#work"
-            whileHover={{ scale: 1.03, y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl glass text-white font-semibold hover:bg-white/10 transition-colors duration-300"
-          >
-            View Our Process
-          </motion.a>
+        <h1 className="font-display text-mega font-extrabold uppercase leading-[0.86] text-bone">
+          <span className="block overflow-hidden">
+            <KineticText text="We build" delay={0.4} />
+          </span>
+          <span className="block overflow-hidden">
+            <KineticText text="intelligent" delay={0.6} className="text-acid" />
+          </span>
+          <span className="block overflow-hidden">
+            <KineticText
+              text="software"
+              delay={0.85}
+              italic
+              className="font-serif-accent font-normal normal-case text-bone-dim"
+            />
+          </span>
+        </h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 1.1 }}
+          className="mt-8 max-w-xl text-base leading-relaxed text-ash sm:text-lg"
+        >
+          AI-powered engineering, elite tech talent, and custom platforms — built to
+          accelerate enterprise teams into the future.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 1.25 }}
+          className="pointer-events-auto mt-10 flex flex-col gap-4 sm:flex-row sm:items-center"
+        >
+          <MagneticButton href="#contact" variant="primary" aria-label="Start your project">
+            Start your project
+            <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </MagneticButton>
+          <MagneticButton href="#work" variant="ghost" aria-label="View our process">
+            View our process
+          </MagneticButton>
         </motion.div>
 
-        {/* Stats */}
+        {/* Stats band */}
         <motion.div
-          variants={itemVariants}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 glass rounded-2xl p-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 1.45 }}
+          className="mt-14 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-8 border-t border-line pt-8 sm:grid-cols-4"
         >
-          {stats.map((stat) => (
-            <StatItem key={stat.label} {...stat} />
+          {stats.map((s) => (
+            <StatItem key={s.label} {...s} />
           ))}
         </motion.div>
       </motion.div>
+
+      <ScrollIndicator />
     </section>
   );
 }
