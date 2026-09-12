@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.techtonicinnovations.com/sitemap.xml
+
+# LLM-readable summary
+# See: https://www.techtonicinnovations.com/llms.txt

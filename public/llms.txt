@@ -1,0 +1,93 @@
+# Techtonic Innovations — LLM-Readable Site Summary
+# https://www.techtonicinnovations.com
+# Last updated: 2026-09-10
+
+## Company Overview
+Techtonic Innovations is an enterprise technology company headquartered in Reston, Virginia, in the Washington, DC metro area. We specialize in AI solution engineering, AI agents and automation, elite tech talent placement, and modern web platform / custom software development.
+
+## What We Do
+
+### 1. AI Development Services
+https://www.techtonicinnovations.com/ai-development-services
+We design and deploy custom artificial intelligence systems: large language model (LLM) integration, RAG pipelines, intelligent automation, predictive analytics, computer vision, and natural language processing, architected for each client's specific business context.
+
+### 2. AI Automation Agency
+https://www.techtonicinnovations.com/ai-automation-agency
+AI-powered workflow automation and AI chatbot development that removes manual, repetitive, and judgment-heavy work from a team's day-to-day operations.
+
+### 3. AI Agent Development
+https://www.techtonicinnovations.com/ai-agent-development
+Custom AI agents that plan multi-step work, call tools and APIs, reason over a company's own data via RAG, and complete tasks end-to-end with human-in-the-loop guardrails.
+
+### 4. Custom Software Development
+https://www.techtonicinnovations.com/custom-software-development
+Full-cycle custom software product development from concept to launch, with AI capabilities integrated where they add real value.
+
+### 5. Web Application Development
+https://www.techtonicinnovations.com/web-application-development
+Modern, high-performance web applications and digital platforms built with React, Next.js, and a cloud-native stack, optimized for speed, accessibility, SEO, and conversion.
+
+### 6. Hire AI Engineers
+https://www.techtonicinnovations.com/hire-ai-engineers
+Contract and permanent placement of vetted AI engineers, machine learning specialists, and data scientists.
+
+### 7. IT Staff Augmentation
+https://www.techtonicinnovations.com/it-staff-augmentation
+Pre-vetted senior engineers, data scientists, and DevOps specialists who embed directly into an existing team and process.
+
+### 8. AI Consulting (Small Business)
+https://www.techtonicinnovations.com/ai-consulting
+AI consulting scoped to small and mid-size business budgets and timelines — practical MVPs and assessments, not enterprise-scale engagements.
+
+### 9. AI Development Company in Virginia
+https://www.techtonicinnovations.com/ai-development-company-virginia
+Local information for Northern Virginia / Washington, DC metro businesses; the same services are available nationwide.
+
+## Key Facts
+- Location: Reston, Virginia, USA (Washington, DC metro area)
+- Services: AI development, AI agents, automation, tech staffing, web/software development
+- Industries Served: Enterprise, SaaS, Healthcare, Finance, Government, E-Commerce
+- Approach: Engineering-first, agile two-week sprints, weeks-not-quarters delivery
+- Website: https://www.techtonicinnovations.com
+- Contact: info@techtonicinnovations.com
+- Phone: +1-571-268-6448
+
+## Technologies We Work With
+- AI/ML: OpenAI, Anthropic Claude, AWS SageMaker, TensorFlow, PyTorch, Hugging Face
+- LLMs: GPT-4, Claude, Llama, fine-tuning, RAG pipelines, AI agents
+- Cloud: AWS, Azure, Google Cloud Platform
+- Web: React, Next.js, TypeScript, Node.js, Python, FastAPI
+- Data: PostgreSQL, MongoDB, Redis, Elasticsearch, vector databases
+- DevOps: Docker, Kubernetes, CI/CD, Terraform
+
+## How to Engage
+Contact us for AI consulting, AI agent or automation development, talent placement, web development projects, or custom software builds. We start every engagement with a free discovery call to understand your specific needs before proposing a solution. Pricing depends on scope, team size, and engagement model — we do not publish flat rates because projects vary too widely, but we always provide a transparent estimate after the discovery call.
+
+## Frequently Asked Questions (Q&A)
+
+Q: What does Techtonic Innovations do?
+A: Techtonic Innovations is an enterprise technology company that delivers AI solution engineering, AI agents and automation, elite tech talent placement, and modern web/software development. We help organizations design, build, and scale AI-powered software.
+
+Q: What AI and machine learning services do you offer?
+A: Custom AI systems including LLM integrations, RAG pipelines, AI agents, NLP, computer vision, predictive analytics, and intelligent automation — architected for each client's business context.
+
+Q: Where is Techtonic Innovations located?
+A: Headquartered in Reston, Virginia, in the Washington, DC metro area. We serve enterprise, SaaS, healthcare, finance, government, and e-commerce clients across the US and remotely worldwide.
+
+Q: How do you place engineers and tech talent?
+A: We connect organizations with rigorously vetted AI engineers, data scientists, ML specialists, full-stack developers, and technical leaders via contract staff augmentation and permanent placement.
+
+Q: What's the difference between an AI agent and a chatbot or automation?
+A: A chatbot answers questions; a traditional automation follows a fixed sequence of steps; an AI agent is given a goal, decides which tools or APIs to call, adapts to intermediate results, and carries a multi-step task through to completion.
+
+Q: What technologies and frameworks do you work with?
+A: OpenAI and Anthropic Claude, AWS, Azure, Google Cloud, React, Next.js, TypeScript, Node.js, Python, FastAPI, PyTorch, TensorFlow, Hugging Face, PostgreSQL, vector databases, Docker, Kubernetes, and Terraform.
+
+Q: How long does a typical project take?
+A: Agile two-week sprints; we deliver in weeks, not quarters. Many web platforms and AI MVPs launch within 6–12 weeks depending on scope.
+
+Q: How much does it cost to work with Techtonic Innovations?
+A: Pricing depends on scope, team size, and engagement model (fixed-scope project, dedicated team, or staff augmentation). We provide a transparent estimate after a free discovery call.
+
+Q: How do we get started?
+A: Use the contact form or email info@techtonicinnovations.com. We respond within 2–4 business hours and begin with a free discovery call.

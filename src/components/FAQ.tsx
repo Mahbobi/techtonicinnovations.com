@@ -3,6 +3,26 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Plus } from "lucide-react";
 import { faqs } from "../data/faqs";
 
+/**
+ * Generated directly from the same `faqs` array that renders the visible
+ * FAQ below, so the FAQPage structured data can never drift out of sync
+ * with what's actually on the page (a Google rich-results requirement).
+ * This lives on the homepage only — service pages render their own
+ * page-specific FAQPage JSON-LD in <ServicePage>.
+ */
+function FaqJsonLd() {
+  const json = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }} />;
+}
+
 function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(index === 0);
   return (
@@ -44,6 +64,7 @@ export function FAQ() {
 
   return (
     <section id="faq" ref={ref} className="section-pad relative border-t border-line">
+      <FaqJsonLd />
       <div className="shell grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -56,9 +77,9 @@ export function FAQ() {
             Questions, <span className="acid-gradient">answered</span>
           </h2>
           <p className="mt-5 max-w-sm text-base leading-relaxed text-ash">
-            Everything you need to know about working with TechTonic Innovations. Still
+            Everything you need to know about working with Techtonic Innovations. Still
             curious?{" "}
-            <a href="#contact" className="text-acid underline-offset-4 hover:underline">
+            <a href="/#contact" className="text-acid underline-offset-4 hover:underline">
               Talk to our team
             </a>
             .

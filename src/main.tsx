@@ -1,10 +1,24 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from "react";
+import { createRoot, hydrateRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.tsx";
+import { RouterProvider } from "./lib/router";
 
-createRoot(document.getElementById('root')!).render(
+const container = document.getElementById("root")!;
+const app = (
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <RouterProvider>
+      <App />
+    </RouterProvider>
+  </StrictMode>
+);
+
+// The prerender script fills #root with real markup for every route; when
+// that markup is present we hydrate onto it instead of re-rendering from
+// scratch, so search engines and first paint get the prerendered HTML while
+// the app becomes interactive without a flash of empty content.
+if (container.innerHTML.trim().length > 0) {
+  hydrateRoot(container, app);
+} else {
+  createRoot(container).render(app);
+}

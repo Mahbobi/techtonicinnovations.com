@@ -1,9 +1,8 @@
 import { lazy, Suspense, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { useScrollAnimation } from "../hooks/useScrollAnimation";
-import { useCountUp } from "../hooks/useCountUp";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import { useHasMounted } from "../hooks/useHasMounted";
 import { MagneticButton } from "./MagneticButton";
 import { KineticText } from "./KineticText";
 import { GridLines, RotatingBadge, ScrollIndicator } from "./HeroDecor";
@@ -11,27 +10,6 @@ import { GridLines, RotatingBadge, ScrollIndicator } from "./HeroDecor";
 const HeroScene = lazy(() =>
   import("../three/HeroScene").then((m) => ({ default: m.HeroScene }))
 );
-
-const stats = [
-  { value: 200, suffix: "+", label: "Projects Delivered" },
-  { value: 50, suffix: "+", label: "Enterprise Clients" },
-  { value: 98, suffix: "%", label: "Client Satisfaction" },
-  { value: 15, suffix: "+", label: "AI Models Deployed" },
-];
-
-function StatItem({ value, suffix, label }: { value: number; suffix: string; label: string }) {
-  const { ref, isVisible } = useScrollAnimation(0.4);
-  const count = useCountUp(value, isVisible);
-  return (
-    <div ref={ref}>
-      <div className="font-display text-3xl font-bold text-bone sm:text-4xl">
-        {count}
-        <span className="text-acid">{suffix}</span>
-      </div>
-      <div className="mt-1 text-xs text-ash sm:text-sm">{label}</div>
-    </div>
-  );
-}
 
 /** Static, GPU-free fallback for reduced-motion users and Suspense loading. */
 function HeroPoster() {
@@ -46,6 +24,13 @@ function HeroPoster() {
 
 export function Hero() {
   const reduced = usePrefersReducedMotion();
+  // The WebGL scene is client-only: render the static poster on the server
+  // and on the client's first (hydrating) render, then swap in the real
+  // Suspense/lazy scene once mounted. This keeps SSR and the first client
+  // paint byte-for-byte identical, so hydration never mismatches, while
+  // still guaranteeing the `import("../three/HeroScene")` dynamic import is
+  // only ever triggered in the browser — never during Node prerendering.
+  const mounted = useHasMounted();
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -64,7 +49,7 @@ export function Hero() {
     >
       {/* 3D scene / poster (full-bleed background) */}
       <div className="absolute inset-0 z-0">
-        {reduced ? (
+        {reduced || !mounted ? (
           <HeroPoster />
         ) : (
           <Suspense fallback={<HeroPoster />}>
@@ -95,14 +80,14 @@ export function Hero() {
 
         <h1 className="font-display text-mega font-extrabold uppercase leading-[0.86] text-bone">
           <span className="block overflow-hidden">
-            <KineticText text="We build" delay={0.4} />
-          </span>
+            <KineticText text="AI development," delay={0.4} />
+          </span>{" "}
           <span className="block overflow-hidden">
-            <KineticText text="intelligent" delay={0.6} className="text-acid" />
-          </span>
+            <KineticText text="automation &" delay={0.6} className="text-acid" />
+          </span>{" "}
           <span className="block overflow-hidden">
             <KineticText
-              text="software"
+              text="software engineering"
               delay={0.85}
               italic
               className="font-serif-accent font-normal normal-case text-bone-dim"
@@ -142,8 +127,18 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 1.45 }}
           className="mt-14 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-8 border-t border-line pt-8 sm:grid-cols-4"
         >
-          {stats.map((s) => (
-            <StatItem key={s.label} {...s} />
+          {[
+            { value: "AI", label: "Agents, LLMs & RAG" },
+            { value: "2-wk", label: "Agile sprints" },
+            { value: "6–12 wk", label: "Typical MVP launch" },
+            { value: "Reston, VA", label: "US-based team" },
+          ].map((s) => (
+            <div key={s.label}>
+              <div className="font-display text-2xl font-bold text-bone sm:text-3xl">
+                {s.value}
+              </div>
+              <div className="mt-1 text-xs text-ash sm:text-sm">{s.label}</div>
+            </div>
           ))}
         </motion.div>
       </motion.div>

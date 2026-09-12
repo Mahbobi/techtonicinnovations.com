@@ -3,21 +3,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
 const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Process", href: "#work" },
-  { label: "Voices", href: "#testimonials" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Services", href: "/#services" },
+  { label: "About", href: "/#about" },
+  { label: "Process", href: "/#work" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 function Wordmark() {
   return (
-    <a href="#hero" className="group flex items-center gap-2.5">
+    <a href="/" className="group flex items-center gap-2.5">
       <span className="grid h-9 w-9 place-items-center rounded-lg bg-acid font-display text-lg font-extrabold text-paper-ink transition-transform duration-300 group-hover:rotate-6">
         T
       </span>
       <span className="font-display text-base font-bold tracking-tight text-bone sm:text-lg">
-        TechTonic<span className="hidden text-ash sm:inline"> Innovations</span>
+        Techtonic<span className="hidden text-ash sm:inline"> Innovations</span>
       </span>
     </a>
   );
@@ -69,7 +68,7 @@ export function Navbar() {
 
             <div className="flex items-center gap-2">
               <a
-                href="#contact"
+                href="/#contact"
                 className="hidden items-center gap-1.5 rounded-full bg-acid px-5 py-2.5 font-display text-sm font-semibold text-paper-ink transition-transform duration-300 hover:-translate-y-0.5 sm:inline-flex"
               >
                 Let's talk
@@ -120,7 +119,7 @@ export function Navbar() {
                 </motion.a>
               ))}
               <motion.a
-                href="#contact"
+                href="/#contact"
                 onClick={() => setMobileOpen(false)}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}

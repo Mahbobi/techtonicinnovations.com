@@ -2,11 +2,13 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Brain, Users, Globe, Cpu, ArrowUpRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { Link } from "../lib/router";
 
 type Service = {
   icon: LucideIcon;
   number: string;
   title: string;
+  slug: string;
   description: string;
   tags: string[];
   accent: string;     // text/icon accent
@@ -17,7 +19,8 @@ const services: Service[] = [
   {
     icon: Brain,
     number: "01",
-    title: "AI Solution Engineering",
+    title: "AI Development Services",
+    slug: "ai-development-services",
     description:
       "Custom machine learning models, NLP pipelines, LLM integrations, and computer vision systems architected around your business context.",
     tags: ["Machine Learning", "NLP", "Computer Vision", "LLMs", "RAG"],
@@ -27,7 +30,8 @@ const services: Service[] = [
   {
     icon: Users,
     number: "02",
-    title: "Elite Tech Talent",
+    title: "Hire AI Engineers",
+    slug: "hire-ai-engineers",
     description:
       "Pre-vetted senior engineers, data scientists, and DevOps specialists ready to embed into your team.",
     tags: ["Staff Augmentation", "Dedicated Teams", "Recruitment"],
@@ -37,7 +41,8 @@ const services: Service[] = [
   {
     icon: Globe,
     number: "03",
-    title: "Web Platform Development",
+    title: "Web Application Development",
+    slug: "web-application-development",
     description:
       "High-performance web apps, SaaS platforms, and PWAs built with React, Next.js, and a modern cloud-native stack.",
     tags: ["React", "Next.js", "Cloud Native", "SaaS"],
@@ -47,7 +52,8 @@ const services: Service[] = [
   {
     icon: Cpu,
     number: "04",
-    title: "Intelligent Software Products",
+    title: "Custom Software Development",
+    slug: "custom-software-development",
     description:
       "End-to-end product development from ideation to launch, integrating AI capabilities from day one to scale.",
     tags: ["Product Strategy", "MVP", "AI-Native", "Scale"],
@@ -97,7 +103,9 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         </div>
 
         <h3 className="font-display text-2xl font-bold text-bone sm:text-[1.7rem]">
-          {service.title}
+          <Link to={`/${service.slug}`} className="transition-colors hover:text-acid">
+            {service.title}
+          </Link>
         </h3>
         <p className="mt-3 max-w-md text-sm leading-relaxed text-ash sm:text-[15px]">
           {service.description}
@@ -109,13 +117,13 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           ))}
         </div>
 
-        <a
-          href="#contact"
+        <Link
+          to={`/${service.slug}`}
           className="mt-7 inline-flex items-center gap-1.5 self-start font-display text-sm font-semibold text-bone-dim transition-colors hover:text-acid"
         >
           Explore service
           <ArrowUpRight className="h-4 w-4" />
-        </a>
+        </Link>
       </div>
     </motion.article>
   );

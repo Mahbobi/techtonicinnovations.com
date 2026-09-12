@@ -9,11 +9,13 @@ const features = [
   { icon: BarChart3, text: "Data-Driven Decision Making" },
 ];
 
+// Descriptive, verifiable capability tiles — no performance or satisfaction
+// figures, which we have no published evidence for.
 const metrics = [
-  { value: "5×", label: "Faster deploy", accent: "text-acid" },
-  { value: "24/7", label: "AI monitoring", accent: "text-azure" },
-  { value: "98%", label: "Satisfaction", accent: "text-flux" },
-  { value: "6 wk", label: "Avg. to launch", accent: "text-ember" },
+  { value: "AI", label: "Agents & LLMs", accent: "text-acid" },
+  { value: "2-wk", label: "Agile sprints", accent: "text-azure" },
+  { value: "6–12 wk", label: "Typical MVP", accent: "text-flux" },
+  { value: "US", label: "Reston, VA team", accent: "text-ember" },
 ];
 
 export function About() {
@@ -32,7 +34,7 @@ export function About() {
           transition={{ duration: 0.8 }}
           className="lg:col-span-7"
         >
-          <p className="eyebrow mb-5">Why TechTonic</p>
+          <p className="eyebrow mb-5">Why Techtonic</p>
           <h2 className="font-display text-h1 font-extrabold uppercase leading-[0.95] text-bone">
             Engineering the future,{" "}
             <span className="font-serif-accent text-h1 font-normal normal-case italic text-acid">

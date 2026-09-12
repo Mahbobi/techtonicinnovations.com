@@ -1,25 +1,13 @@
 import { ArrowUpRight } from "lucide-react";
+import { services } from "../data/services";
+import { Link } from "../lib/router";
 
-const footerLinks = {
-  Services: [
-    { label: "AI Engineering", href: "#services" },
-    { label: "Tech Talent", href: "#services" },
-    { label: "Web Platforms", href: "#services" },
-    { label: "Software Products", href: "#services" },
-  ],
-  Company: [
-    { label: "About Us", href: "#about" },
-    { label: "Our Process", href: "#work" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Contact", href: "#contact" },
-  ],
-  Connect: [
-    { label: "LinkedIn", href: "#" },
-    { label: "Twitter / X", href: "#" },
-    { label: "GitHub", href: "#" },
-    { label: "Careers", href: "#" },
-  ],
-};
+const companyLinks = [
+  { label: "About Us", href: "/#about" },
+  { label: "Our Process", href: "/#work" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contact", href: "/#contact" },
+];
 
 export function Footer() {
   return (
@@ -32,7 +20,7 @@ export function Footer() {
             <span className="acid-gradient">what's next.</span>
           </h2>
           <a
-            href="#contact"
+            href="/#contact"
             className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-acid px-8 py-4 font-display text-lg font-semibold text-paper-ink transition-transform duration-300 hover:-translate-y-1"
           >
             Start a project
@@ -44,9 +32,9 @@ export function Footer() {
       {/* Links */}
       <div className="shell grid grid-cols-2 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-5">
         <div className="col-span-2 lg:col-span-2">
-          <a href="#hero" className="flex items-center gap-2.5">
+          <a href="/" className="flex items-center gap-2.5">
             <span className="grid h-9 w-9 place-items-center rounded-lg bg-acid font-display text-lg font-extrabold text-paper-ink">T</span>
-            <span className="font-display text-lg font-bold text-bone">TechTonic Innovations</span>
+            <span className="font-display text-lg font-bold text-bone">Techtonic Innovations</span>
           </a>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-ash">
             AI-powered software engineering and elite tech talent. We build
@@ -58,32 +46,47 @@ export function Footer() {
           </div>
         </div>
 
-        {Object.entries(footerLinks).map(([title, links]) => (
-          <div key={title}>
-            <h3 className="mb-5 font-display text-sm font-semibold uppercase tracking-wider text-bone">
-              {title}
-            </h3>
-            <ul className="space-y-3">
-              {links.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-sm text-ash transition-colors duration-200 hover:text-acid">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <div>
+          <h3 className="mb-5 font-display text-sm font-semibold uppercase tracking-wider text-bone">
+            Services
+          </h3>
+          <ul className="space-y-3">
+            {services.map((s) => (
+              <li key={s.slug}>
+                <Link
+                  to={`/${s.slug}`}
+                  className="text-sm text-ash transition-colors duration-200 hover:text-acid"
+                >
+                  {s.navLabel}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="mb-5 font-display text-sm font-semibold uppercase tracking-wider text-bone">
+            Company
+          </h3>
+          <ul className="space-y-3">
+            {companyLinks.map((link) => (
+              <li key={link.label}>
+                <a href={link.href} className="text-sm text-ash transition-colors duration-200 hover:text-acid">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       {/* Bottom */}
       <div className="shell flex flex-col items-center justify-between gap-4 border-t border-line py-8 sm:flex-row">
         <p className="text-sm text-ash-dim">
-          &copy; {new Date().getFullYear()} TechTonic Innovations. All rights reserved.
+          &copy; {new Date().getFullYear()} Techtonic Innovations. All rights reserved.
         </p>
         <div className="flex gap-6">
-          <a href="#" className="text-sm text-ash-dim transition-colors hover:text-bone-dim">Privacy Policy</a>
-          <a href="#" className="text-sm text-ash-dim transition-colors hover:text-bone-dim">Terms of Service</a>
+          <a href="/#contact" className="text-sm text-ash-dim transition-colors hover:text-bone-dim">Contact</a>
         </div>
       </div>
     </footer>

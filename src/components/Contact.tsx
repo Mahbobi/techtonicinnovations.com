@@ -1,13 +1,14 @@
 import { useRef, useState, type FormEvent } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowUpRight, CheckCircle2, Mail, Phone, MapPin, Loader2, AlertCircle } from "lucide-react";
+import { SITE } from "../data/site";
 
 const WEB3FORMS_ACCESS_KEY = "704ca11a-48a8-4d4b-a584-fd4c8ea6d469";
 
 const contactInfo = [
-  { icon: Mail, label: "info@techtonicinnovations.com", href: "mailto:info@techtonicinnovations.com" },
-  { icon: Phone, label: "+1-571-268-6448", href: "tel:+15712686448" },
-  { icon: MapPin, label: "Washington, DC", href: null },
+  { icon: Mail, label: SITE.email, href: SITE.mailHref },
+  { icon: Phone, label: SITE.phoneDisplay, href: SITE.telHref },
+  { icon: MapPin, label: SITE.locationDisplay, href: null },
 ];
 
 const services = [
@@ -40,7 +41,7 @@ export function Contact() {
         body: JSON.stringify({
           access_key: WEB3FORMS_ACCESS_KEY,
           subject: `New inquiry from ${formData.name} — ${formData.service}`,
-          from_name: "TechTonic Innovations Website",
+          from_name: "Techtonic Innovations Website",
           ...formData,
         }),
       });

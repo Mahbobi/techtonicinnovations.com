@@ -7,7 +7,7 @@ const testimonials = [
     name: "Sarah Chen",
     role: "CTO, FinovateAI",
     quote:
-      "TechTonic's AI engineering team delivered a fraud detection system that reduced false positives by 73%. Their technical depth is unmatched.",
+      "Techtonic's AI engineering team delivered a fraud detection system that reduced false positives by 73%. Their technical depth is unmatched.",
     rating: 5,
     featured: true,
     avatar: "SC",
@@ -16,7 +16,7 @@ const testimonials = [
     name: "Marcus Rivera",
     role: "VP Engineering, ScalePoint",
     quote:
-      "We hired three senior engineers through TechTonic. All three became key contributors within weeks. The vetting process is exceptional.",
+      "We hired three senior engineers through Techtonic. All three became key contributors within weeks. The vetting process is exceptional.",
     rating: 5,
     featured: false,
     avatar: "MR",
@@ -25,7 +25,7 @@ const testimonials = [
     name: "Emily Nakamura",
     role: "CEO, GreenTech Solutions",
     quote:
-      "From concept to launch in 12 weeks. TechTonic built our entire SaaS platform with AI-powered analytics that our clients love.",
+      "From concept to launch in 12 weeks. Techtonic built our entire SaaS platform with AI-powered analytics that our clients love.",
     rating: 5,
     featured: false,
     avatar: "EN",
