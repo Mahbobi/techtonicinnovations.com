@@ -3,6 +3,21 @@ import { motion, useInView } from "framer-motion";
 import { Brain, Users, Globe, Cpu, ArrowUpRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Link } from "../lib/router";
+import { getServiceBySlug } from "../data/services";
+
+/** Packaged engagements and newer services, linked below the main cards. */
+const MORE_SLUGS = [
+  "ai-readiness-audit",
+  "ai-discovery-sprint",
+  "ai-security-audit",
+  "managed-ai-services",
+  "ai-agent-development",
+  "shopify-development",
+  "mobile-app-development",
+];
+const moreServices = MORE_SLUGS.map((slug) => getServiceBySlug(slug)).filter(
+  (s): s is NonNullable<typeof s> => Boolean(s)
+);
 
 type Service = {
   icon: LucideIcon;
@@ -158,6 +173,25 @@ export function Services() {
           {services.map((s, i) => (
             <ServiceCard key={s.number} service={s} index={i} />
           ))}
+        </div>
+
+        <div className="mt-10 flex flex-col gap-4 rounded-3xl border border-line bg-surface/40 p-6 sm:p-7 lg:flex-row lg:items-center lg:gap-8">
+          <p className="shrink-0 font-display text-sm font-semibold uppercase tracking-wider text-bone">
+            More ways to work with us
+          </p>
+          <ul className="flex flex-wrap gap-2">
+            {moreServices.map((s) => (
+              <li key={s.slug}>
+                <Link
+                  to={`/${s.slug}`}
+                  className="inline-flex items-center gap-1 rounded-full border border-line px-3.5 py-1.5 text-sm text-bone-dim transition-colors duration-200 hover:border-acid/50 hover:text-acid"
+                >
+                  {s.navLabel}
+                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

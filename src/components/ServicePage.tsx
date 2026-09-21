@@ -1,11 +1,37 @@
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ArrowUpRight, ChevronRight, Plus } from "lucide-react";
 import type { ServiceDef } from "../data/services";
-import { services } from "../data/services";
+import { getServiceBySlug, services } from "../data/services";
 import { SITE } from "../data/site";
 import { useDocumentHead } from "../lib/head";
 import { Link } from "../lib/router";
+
+const INLINE_LINK = /\[([^\]]+)\]\((\/[^)\s]*)\)/g;
+
+/**
+ * Renders service copy, turning `[label](/path)` into internal <Link>s.
+ * Only site-relative paths ("/...") are linked; anything else stays literal
+ * text, and React escapes everything, so copy can never inject markup.
+ */
+function renderInline(text: string): ReactNode {
+  const out: ReactNode[] = [];
+  let last = 0;
+  for (const m of text.matchAll(INLINE_LINK)) {
+    const [full, label, to] = m;
+    const at = m.index ?? 0;
+    if (at > last) out.push(text.slice(last, at));
+    out.push(
+      <Link key={`${to}-${at}`} to={to} className="text-bone underline decoration-acid/60 underline-offset-4 transition-colors hover:text-acid">
+        {label}
+      </Link>
+    );
+    last = at + full.length;
+  }
+  if (out.length === 0) return text;
+  if (last < text.length) out.push(text.slice(last));
+  return out;
+}
 
 function BreadcrumbJsonLd({ service }: { service: ServiceDef }) {
   const json = {
@@ -109,6 +135,9 @@ export function ServicePage({ service }: { service: ServiceDef }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const siblings = services.filter((s) => s.slug !== service.slug);
+  const related = (service.related ?? [])
+    .map((slug) => getServiceBySlug(slug))
+    .filter((s): s is NonNullable<typeof s> => Boolean(s) && s?.slug !== service.slug);
 
   return (
     <article ref={ref} className="pt-32 pb-16 sm:pt-36">
@@ -133,6 +162,7 @@ export function ServicePage({ service }: { service: ServiceDef }) {
           <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
             <a
               href="/#contact"
+              data-cta="service-hero"
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-acid px-7 py-4 font-display font-semibold text-paper-ink transition-transform duration-300 hover:-translate-y-0.5"
             >
               Start your project
@@ -150,7 +180,7 @@ export function ServicePage({ service }: { service: ServiceDef }) {
               <div className="mt-5 space-y-5">
                 {section.paragraphs.map((p, i) => (
                   <p key={i} className="max-w-2xl text-base leading-relaxed text-ash sm:text-[17px]">
-                    {p}
+                    {renderInline(p)}
                   </p>
                 ))}
               </div>
@@ -159,7 +189,7 @@ export function ServicePage({ service }: { service: ServiceDef }) {
                   {section.subsections.map((sub) => (
                     <div key={sub.h3}>
                       <h3 className="font-display text-lg font-bold text-bone">{sub.h3}</h3>
-                      <p className="mt-2 max-w-2xl text-base leading-relaxed text-ash">{sub.body}</p>
+                      <p className="mt-2 max-w-2xl text-base leading-relaxed text-ash">{renderInline(sub.body)}</p>
                     </div>
                   ))}
                 </div>
@@ -172,13 +202,37 @@ export function ServicePage({ service }: { service: ServiceDef }) {
                       className="flex items-start gap-2.5 rounded-xl border border-line bg-surface/60 p-4 text-sm text-bone-dim"
                     >
                       <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-acid" aria-hidden="true" />
-                      {b}
+                      <span>{renderInline(b)}</span>
                     </li>
                   ))}
                 </ul>
               )}
             </section>
           ))}
+
+          {related.length > 0 && (
+            <section aria-labelledby="related-services" className="mb-14">
+              <h2 id="related-services" className="font-display text-h2 font-extrabold uppercase text-bone">
+                Related services
+              </h2>
+              <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {related.map((r) => (
+                  <li key={r.slug}>
+                    <Link
+                      to={`/${r.slug}`}
+                      className="group flex h-full flex-col rounded-xl border border-line bg-surface/60 p-5 transition-colors duration-200 hover:border-acid/40"
+                    >
+                      <span className="flex items-center justify-between gap-2 font-display font-semibold text-bone group-hover:text-acid">
+                        {r.navLabel}
+                        <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                      </span>
+                      <span className="mt-2 text-sm leading-relaxed text-ash">{r.metaDescription}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           {/* Visible FAQ — must match the FAQPage JSON-LD above exactly */}
           <section id="faq" className="mt-4 border-t border-line pt-12">
@@ -203,6 +257,7 @@ export function ServicePage({ service }: { service: ServiceDef }) {
             </p>
             <a
               href="/#contact"
+              data-cta="service-sidebar"
               className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-acid px-6 py-3.5 font-display text-sm font-semibold text-paper-ink transition-transform duration-300 hover:-translate-y-0.5"
             >
               Start a conversation
@@ -216,9 +271,9 @@ export function ServicePage({ service }: { service: ServiceDef }) {
             </p>
           </div>
 
-          <nav aria-label="Related services" className="mt-8">
+          <nav aria-label="All services" className="mt-8">
             <h2 className="mb-4 font-display text-sm font-semibold uppercase tracking-wider text-bone">
-              Related services
+              All services
             </h2>
             <ul className="space-y-1">
               {siblings.map((s) => (

@@ -167,7 +167,7 @@ async function main() {
   // sitemap.xml — generated from the same route list used for prerendering,
   // so it can never drift out of sync with what actually got built. Full
   // page URLs only, no #fragments.
-  const lastmod = "2026-09-10";
+  const lastmod = "2026-09-21";
   const urlEntries = ALL_ROUTES.map(
     (r) =>
       `  <url>\n` +

@@ -1,6 +1,6 @@
 # Techtonic Innovations — LLM-Readable Site Summary
 # https://www.techtonicinnovations.com
-# Last updated: 2026-09-10
+# Last updated: 2026-09-21
 
 ## Company Overview
 Techtonic Innovations is an enterprise technology company headquartered in Reston, Virginia, in the Washington, DC metro area. We specialize in AI solution engineering, AI agents and automation, elite tech talent placement, and modern web platform / custom software development.
@@ -29,7 +29,7 @@ Modern, high-performance web applications and digital platforms built with React
 
 ### 6. Hire AI Engineers
 https://www.techtonicinnovations.com/hire-ai-engineers
-Contract and permanent placement of vetted AI engineers, machine learning specialists, and data scientists.
+Contract and permanent placement of vetted AI engineers, machine learning specialists, and data scientists, or a forward-deployed AI pod: a small embedded team that works inside the client's stack.
 
 ### 7. IT Staff Augmentation
 https://www.techtonicinnovations.com/it-staff-augmentation
@@ -39,9 +39,37 @@ Pre-vetted senior engineers, data scientists, and DevOps specialists who embed d
 https://www.techtonicinnovations.com/ai-consulting
 AI consulting scoped to small and mid-size business budgets and timelines — practical MVPs and assessments, not enterprise-scale engagements.
 
-### 9. AI Development Company in Virginia
+### 9. AI Readiness Audit
+https://www.techtonicinnovations.com/ai-readiness-audit
+A paid two-to-four-week audit of workflows, data, systems, and risk. Deliverable: a written AI-use roadmap and a phased build estimate. Fixed price, scoped on a free call.
+
+### 10. AI Discovery Sprint
+https://www.techtonicinnovations.com/ai-discovery-sprint
+A fixed-price four-to-six-week proof-of-concept sprint on one use case. Deliverables: a working prototype on the client's real data, an evaluation report, and a production roadmap.
+
+### 11. AI Security Audit
+https://www.techtonicinnovations.com/ai-security-audit
+AI code, security, and cost audit for LLM systems: LLM red teaming, prompt-injection testing, evaluation harnesses, and a model API cost review.
+
+### 12. Managed AI Services
+https://www.techtonicinnovations.com/managed-ai-services
+A monthly retainer to operate AI systems after launch: monitoring, scheduled evaluations, model and prompt updates, and API cost control. Tiers (Monitor, Operate, Embedded) are scoped on a free call.
+
+### 13. Shopify Development
+https://www.techtonicinnovations.com/shopify-development
+Shopify store builds, custom themes, migrations, headless storefronts, custom apps and integrations, plus AI add-ons for search, catalog content, and support.
+
+### 14. Mobile App Development
+https://www.techtonicinnovations.com/mobile-app-development
+Cross-platform iOS and Android apps with Flutter and React Native, built alongside the web application and backend by one team.
+
+### 15. AI Development Company in Virginia
 https://www.techtonicinnovations.com/ai-development-company-virginia
 Local information for Northern Virginia / Washington, DC metro businesses; the same services are available nationwide.
+
+## Other Pages
+- Contact: https://www.techtonicinnovations.com/contact
+- Privacy policy: https://www.techtonicinnovations.com/privacy
 
 ## Key Facts
 - Location: Reston, Virginia, USA (Washington, DC metro area)
