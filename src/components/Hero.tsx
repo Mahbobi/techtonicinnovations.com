@@ -109,6 +109,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.25 }}
+          data-cta="hero"
           className="pointer-events-auto mt-10 flex flex-col gap-4 sm:flex-row sm:items-center"
         >
           <MagneticButton href="#contact" variant="primary" aria-label="Start your project">

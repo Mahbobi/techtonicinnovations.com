@@ -79,7 +79,7 @@ export function FAQ() {
           <p className="mt-5 max-w-sm text-base leading-relaxed text-ash">
             Everything you need to know about working with Techtonic Innovations. Still
             curious?{" "}
-            <a href="/#contact" className="text-acid underline-offset-4 hover:underline">
+            <a href="/#contact" data-cta="faq" className="text-acid underline-offset-4 hover:underline">
               Talk to our team
             </a>
             .

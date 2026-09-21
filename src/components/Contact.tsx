@@ -2,6 +2,7 @@ import { useRef, useState, type FormEvent } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowUpRight, CheckCircle2, Mail, Phone, MapPin, Loader2, AlertCircle } from "lucide-react";
 import { SITE } from "../data/site";
+import { trackContactSubmit } from "../lib/analytics";
 
 const WEB3FORMS_ACCESS_KEY = "704ca11a-48a8-4d4b-a584-fd4c8ea6d469";
 
@@ -47,6 +48,7 @@ export function Contact() {
       });
       const result = await response.json();
       if (result.success) {
+        trackContactSubmit(formData.service);
         setSubmitted(true);
         setFormData({ name: "", email: "", service: "", message: "" });
         setTimeout(() => setSubmitted(false), 4000);
