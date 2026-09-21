@@ -6,7 +6,12 @@ const companyLinks = [
   { label: "About Us", href: "/#about" },
   { label: "Our Process", href: "/#work" },
   { label: "FAQ", href: "/#faq" },
-  { label: "Contact", href: "/#contact" },
+];
+
+// Internal routes with their own prerendered pages (client-side navigation).
+const companyRoutes = [
+  { label: "Contact", to: "/contact" },
+  { label: "Privacy Policy", to: "/privacy" },
 ];
 
 export function Footer() {
@@ -21,6 +26,7 @@ export function Footer() {
           </h2>
           <a
             href="/#contact"
+            data-cta="footer-band"
             className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-acid px-8 py-4 font-display text-lg font-semibold text-paper-ink transition-transform duration-300 hover:-translate-y-1"
           >
             Start a project
@@ -46,11 +52,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div>
+        <div className="col-span-2 lg:col-span-2">
           <h3 className="mb-5 font-display text-sm font-semibold uppercase tracking-wider text-bone">
             Services
           </h3>
-          <ul className="space-y-3">
+          <ul className="gap-x-8 sm:columns-2 [&>li]:mb-3 [&>li]:break-inside-avoid">
             {services.map((s) => (
               <li key={s.slug}>
                 <Link
@@ -76,6 +82,13 @@ export function Footer() {
                 </a>
               </li>
             ))}
+            {companyRoutes.map((link) => (
+              <li key={link.to}>
+                <Link to={link.to} className="text-sm text-ash transition-colors duration-200 hover:text-acid">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -86,7 +99,8 @@ export function Footer() {
           &copy; {new Date().getFullYear()} Techtonic Innovations. All rights reserved.
         </p>
         <div className="flex gap-6">
-          <a href="/#contact" className="text-sm text-ash-dim transition-colors hover:text-bone-dim">Contact</a>
+          <Link to="/privacy" className="text-sm text-ash-dim transition-colors hover:text-bone-dim">Privacy</Link>
+          <Link to="/contact" className="text-sm text-ash-dim transition-colors hover:text-bone-dim">Contact</Link>
         </div>
       </div>
     </footer>

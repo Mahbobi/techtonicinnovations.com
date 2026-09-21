@@ -5,6 +5,8 @@ import { CursorTrail } from "./components/CursorTrail";
 import { ServicePage } from "./components/ServicePage";
 import { HomePage } from "./pages/Home";
 import { NotFoundPage } from "./pages/NotFound";
+import { ContactPage } from "./pages/Contact";
+import { PrivacyPage } from "./pages/Privacy";
 import { getServiceBySlug } from "./data/services";
 import { useRouter } from "./lib/router";
 
@@ -16,6 +18,10 @@ function App() {
   let content;
   if (pathname === "/") {
     content = <HomePage />;
+  } else if (pathname === "/contact") {
+    content = <ContactPage />;
+  } else if (pathname === "/privacy") {
+    content = <PrivacyPage />;
   } else if (service) {
     content = <ServicePage service={service} />;
   } else {
