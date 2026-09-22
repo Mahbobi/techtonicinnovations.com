@@ -4,8 +4,8 @@ import { inject, track } from "@vercel/analytics";
  * Vercel Web Analytics + conversion events.
  *
  * - Page views: `inject()` loads Vercel's cookieless script from the site's
- *   own origin (/_vercel/insights/*). It is inert until Web Analytics is
- *   enabled for the project in the Vercel dashboard.
+ *   own origin (/_vercel/insights/*). Web Analytics is enabled for the
+ *   project in the Vercel dashboard (disclosed in src/data/privacy.ts).
  * - Conversions: one delegated click listener records `cta_click` for every
  *   link that leads to the contact form, the /contact page, email, or phone,
  *   so new CTAs are tracked without per-button wiring. Add
