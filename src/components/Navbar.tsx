@@ -172,6 +172,12 @@ export function Navbar() {
 
             <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
               <ServicesMenu />
+              <Link
+                to="/case-studies"
+                className="rounded-lg px-3.5 py-2 text-sm text-bone-dim transition-colors duration-200 hover:bg-white/5 hover:text-bone"
+              >
+                Case Studies
+              </Link>
               {navLinks.map((link) => (
                 <a
                   key={link.href}
@@ -264,6 +270,15 @@ export function Navbar() {
                   )}
                 </div>
               )}
+              <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 }}>
+                <Link
+                  to="/case-studies"
+                  onClick={closeMobile}
+                  className="font-display text-4xl font-bold text-bone transition-colors hover:text-acid"
+                >
+                  Case Studies
+                </Link>
+              </motion.div>
               {navLinks.map((link, i) => (
                 <motion.a
                   key={link.href}

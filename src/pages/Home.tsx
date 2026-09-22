@@ -2,6 +2,7 @@ import { Hero } from "../components/Hero";
 import { LogoMarquee } from "../components/LogoMarquee";
 import { Services } from "../components/Services";
 import { About } from "../components/About";
+import { HomeCaseStudies } from "../components/HomeCaseStudies";
 import { Process } from "../components/Process";
 import { FAQ } from "../components/FAQ";
 import { Contact } from "../components/Contact";
@@ -21,6 +22,7 @@ export function HomePage() {
       <Hero />
       <LogoMarquee />
       <Services />
+      <HomeCaseStudies />
       <About />
       <Process />
       <FAQ />

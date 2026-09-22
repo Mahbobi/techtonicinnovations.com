@@ -7,6 +7,10 @@ import { HomePage } from "./pages/Home";
 import { NotFoundPage } from "./pages/NotFound";
 import { ContactPage } from "./pages/Contact";
 import { PrivacyPage } from "./pages/Privacy";
+import { TermsPage } from "./pages/Terms";
+import { CaseStudiesPage } from "./pages/CaseStudies";
+import { CaseStudyPage } from "./pages/CaseStudy";
+import { CASE_STUDIES_PATH, getCaseStudyBySlug } from "./data/caseStudies";
 import { getServiceBySlug } from "./data/services";
 import { useRouter } from "./lib/router";
 
@@ -14,6 +18,9 @@ function App() {
   const { pathname } = useRouter();
   const slug = pathname === "/" ? "" : pathname.slice(1);
   const service = slug ? getServiceBySlug(slug) : undefined;
+  const caseStudy = pathname.startsWith(`${CASE_STUDIES_PATH}/`)
+    ? getCaseStudyBySlug(pathname.slice(CASE_STUDIES_PATH.length + 1))
+    : undefined;
 
   let content;
   if (pathname === "/") {
@@ -22,6 +29,12 @@ function App() {
     content = <ContactPage />;
   } else if (pathname === "/privacy") {
     content = <PrivacyPage />;
+  } else if (pathname === "/terms") {
+    content = <TermsPage />;
+  } else if (pathname === CASE_STUDIES_PATH) {
+    content = <CaseStudiesPage />;
+  } else if (caseStudy) {
+    content = <CaseStudyPage study={caseStudy} />;
   } else if (service) {
     content = <ServicePage service={service} />;
   } else {

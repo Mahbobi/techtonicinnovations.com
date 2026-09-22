@@ -1,5 +1,6 @@
 import { services } from "./services";
 import { SITE } from "./site";
+import { CASE_STUDIES_PATH, caseStudies, caseStudyOgImage, caseStudyPath } from "./caseStudies";
 import type { HeadMeta } from "../lib/head";
 
 export type RouteEntry = {
@@ -54,6 +55,48 @@ export const PRIVACY_ROUTE: RouteEntry = {
   priority: 0.3,
 };
 
-export const PAGE_ROUTES: RouteEntry[] = [CONTACT_ROUTE, PRIVACY_ROUTE];
+export const TERMS_ROUTE: RouteEntry = {
+  path: "/terms",
+  meta: {
+    title: `Terms of Service | ${SITE.name}`,
+    description:
+      "Terms for using the Techtonic Innovations website, including how estimates, proposals, case studies, and AI-related information on the site should be read.",
+    canonical: `${SITE.url}/terms`,
+    ogImageAlt: `${SITE.name} terms of service`,
+  },
+  priority: 0.3,
+};
 
-export const ALL_ROUTES: RouteEntry[] = [HOME_ROUTE, ...SERVICE_ROUTES, ...PAGE_ROUTES];
+export const CASE_STUDIES_ROUTE: RouteEntry = {
+  path: CASE_STUDIES_PATH,
+  meta: {
+    title: `Case Studies: Websites, AI & Software | ${SITE.shortName}`,
+    description:
+      "Case studies of websites and AI software we designed and built: client sites for Bagram Events and Design by Masuma, plus our own AI products.",
+    canonical: `${SITE.url}${CASE_STUDIES_PATH}`,
+    ogImageAlt: `${SITE.name} case studies`,
+  },
+  priority: 0.7,
+};
+
+export const CASE_STUDY_ROUTES: RouteEntry[] = caseStudies.map((c) => ({
+  path: caseStudyPath(c),
+  meta: {
+    title: c.metaTitle,
+    description: c.metaDescription,
+    canonical: `${SITE.url}${caseStudyPath(c)}`,
+    ogImageAlt: c.imageAlt,
+    ogImage: caseStudyOgImage(c),
+  },
+  priority: 0.6,
+}));
+
+export const PAGE_ROUTES: RouteEntry[] = [CONTACT_ROUTE, PRIVACY_ROUTE, TERMS_ROUTE];
+
+export const ALL_ROUTES: RouteEntry[] = [
+  HOME_ROUTE,
+  ...SERVICE_ROUTES,
+  CASE_STUDIES_ROUTE,
+  ...CASE_STUDY_ROUTES,
+  ...PAGE_ROUTES,
+];

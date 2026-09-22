@@ -67,9 +67,23 @@ Cross-platform iOS and Android apps with Flutter and React Native, built alongsi
 https://www.techtonicinnovations.com/ai-development-company-virginia
 Local information for Northern Virginia / Washington, DC metro businesses; the same services are available nationwide.
 
+## Case Studies
+https://www.techtonicinnovations.com/case-studies
+Each case study is written from the project's repository and live site; results list only verifiable facts.
+
+Our products (designed, built, and operated by Techtonic Innovations LLC):
+- Co-Help (https://co-help.com) — Electron desktop AI assistant for Windows and macOS: live transcription, a parallel race across AI providers via a managed Cloud Run API, local-first encrypted storage. https://www.techtonicinnovations.com/case-studies/co-help
+- Justice Genie (https://justicegenie.help) — FastAPI + RAG legal-information app for self-represented litigants: answers grounded in the user's documents and cited public law, abstains when unsure, mock-hearing practice mode. https://www.techtonicinnovations.com/case-studies/justice-genie
+- NexGen QA (https://qa-automation.com) — multi-tenant AI testing platform with 35+ modules, a bring-your-own-key GitHub Actions runner, and an SSRF-hardened public website audit tool. https://www.techtonicinnovations.com/case-studies/nexgen-qa
+
+Client projects:
+- Bagram Events (https://www.bagram.us) — Next.js website for an Afghan cultural events organizer in the Washington, DC area, with ticket links and a Resend-powered contact form. https://www.techtonicinnovations.com/case-studies/bagram-events
+- Design by Masuma (https://designbymasuma.com) — photography-led site for a floral and event design studio with an Express API, live consultation calendar, and emailed inquiries. https://www.techtonicinnovations.com/case-studies/design-by-masuma
+
 ## Other Pages
 - Contact: https://www.techtonicinnovations.com/contact
 - Privacy policy: https://www.techtonicinnovations.com/privacy
+- Terms of service: https://www.techtonicinnovations.com/terms
 
 ## Key Facts
 - Location: Reston, Virginia, USA (Washington, DC metro area)

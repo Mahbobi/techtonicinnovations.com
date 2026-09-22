@@ -10,8 +10,10 @@ const companyLinks = [
 
 // Internal routes with their own prerendered pages (client-side navigation).
 const companyRoutes = [
+  { label: "Case Studies", to: "/case-studies" },
   { label: "Contact", to: "/contact" },
   { label: "Privacy Policy", to: "/privacy" },
+  { label: "Terms of Service", to: "/terms" },
 ];
 
 export function Footer() {
@@ -100,6 +102,7 @@ export function Footer() {
         </p>
         <div className="flex gap-6">
           <Link to="/privacy" className="text-sm text-ash-dim transition-colors hover:text-bone-dim">Privacy</Link>
+          <Link to="/terms" className="text-sm text-ash-dim transition-colors hover:text-bone-dim">Terms</Link>
           <Link to="/contact" className="text-sm text-ash-dim transition-colors hover:text-bone-dim">Contact</Link>
         </div>
       </div>
