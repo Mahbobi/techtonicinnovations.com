@@ -1,4 +1,4 @@
-import { useRef, useState, type ReactNode } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ArrowUpRight, ChevronRight, Plus } from "lucide-react";
 import type { ServiceDef } from "../data/services";
@@ -6,32 +6,7 @@ import { getServiceBySlug, services } from "../data/services";
 import { SITE } from "../data/site";
 import { useDocumentHead } from "../lib/head";
 import { Link } from "../lib/router";
-
-const INLINE_LINK = /\[([^\]]+)\]\((\/[^)\s]*)\)/g;
-
-/**
- * Renders service copy, turning `[label](/path)` into internal <Link>s.
- * Only site-relative paths ("/...") are linked; anything else stays literal
- * text, and React escapes everything, so copy can never inject markup.
- */
-function renderInline(text: string): ReactNode {
-  const out: ReactNode[] = [];
-  let last = 0;
-  for (const m of text.matchAll(INLINE_LINK)) {
-    const [full, label, to] = m;
-    const at = m.index ?? 0;
-    if (at > last) out.push(text.slice(last, at));
-    out.push(
-      <Link key={`${to}-${at}`} to={to} className="text-bone underline decoration-acid/60 underline-offset-4 transition-colors hover:text-acid">
-        {label}
-      </Link>
-    );
-    last = at + full.length;
-  }
-  if (out.length === 0) return text;
-  if (last < text.length) out.push(text.slice(last));
-  return out;
-}
+import { renderInline } from "../lib/inline";
 
 function BreadcrumbJsonLd({ service }: { service: ServiceDef }) {
   const json = {

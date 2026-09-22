@@ -56,6 +56,9 @@ function countWords(html) {
   return text.trim().split(/\s+/).filter(Boolean).length;
 }
 
+// Pages without their own social image (HeadMeta.ogImage) keep the site-wide one.
+const DEFAULT_OG_IMAGE = "https://www.techtonicinnovations.com/og-image.png";
+
 const HEAD_REPLACEMENTS = [
   [/<title>[\s\S]*?<\/title>/, (m) => `<title>${escapeHtml(m.title)}</title>`],
   [
@@ -73,6 +76,14 @@ const HEAD_REPLACEMENTS = [
   [
     /<meta property="og:url" content="[^"]*"\s*\/?>/,
     (m) => `<meta property="og:url" content="${m.canonical}" />`,
+  ],
+  [
+    /<meta property="og:image" content="[^"]*"\s*\/?>/,
+    (m) => `<meta property="og:image" content="${escapeHtml(m.ogImage ?? DEFAULT_OG_IMAGE)}" />`,
+  ],
+  [
+    /<meta name="twitter:image" content="[^"]*"\s*\/?>/,
+    (m) => `<meta name="twitter:image" content="${escapeHtml(m.ogImage ?? DEFAULT_OG_IMAGE)}" />`,
   ],
   [
     /<meta property="og:image:alt" content="[^"]*"\s*\/?>/,

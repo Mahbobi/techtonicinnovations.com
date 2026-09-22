@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { SITE } from "../data/site";
 
 /**
  * Per-route <head> metadata. The prerender script injects this into the
@@ -12,6 +13,8 @@ export type HeadMeta = {
   description: string;
   canonical: string;
   ogImageAlt: string;
+  /** Absolute URL of a page-specific social image; defaults to SITE.ogImage. */
+  ogImage?: string;
 };
 
 function setMetaByAttr(attr: "name" | "property", key: string, content: string) {
@@ -40,9 +43,11 @@ export function applyHead(meta: HeadMeta) {
   setMetaByAttr("property", "og:title", meta.title);
   setMetaByAttr("property", "og:description", meta.description);
   setMetaByAttr("property", "og:url", meta.canonical);
+  setMetaByAttr("property", "og:image", meta.ogImage ?? SITE.ogImage);
   setMetaByAttr("property", "og:image:alt", meta.ogImageAlt);
   setMetaByAttr("name", "twitter:title", meta.title);
   setMetaByAttr("name", "twitter:description", meta.description);
+  setMetaByAttr("name", "twitter:image", meta.ogImage ?? SITE.ogImage);
   setMetaByAttr("name", "twitter:image:alt", meta.ogImageAlt);
   setCanonical(meta.canonical);
 }
@@ -56,5 +61,5 @@ export function useDocumentHead(meta: HeadMeta) {
     // otherwise re-run this effect on every render instead of only when the
     // actual metadata changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [meta.title, meta.description, meta.canonical, meta.ogImageAlt]);
+  }, [meta.title, meta.description, meta.canonical, meta.ogImageAlt, meta.ogImage]);
 }
