@@ -24,7 +24,7 @@ export const productCaseStudies: CaseStudy[] = [
     sector: "AI desktop app",
     metaTitle: "Co-Help: Multi-Model AI Desktop App | Techtonic Innovations",
     metaDescription:
-      "How we built Co-Help, our real-time AI desktop assistant: live transcription, a parallel race across AI providers, and local-first encrypted storage.",
+      "How we built Co-Help, our real-time AI desktop assistant: live transcription, a parallel race across AI providers, and local-first storage.",
     outcome: "Shipping v5.11.1 for Windows and macOS, backed by a managed API that races AI providers in parallel.",
     intro:
       "Co-Help is a desktop app we designed, built, and run. It listens to a live interview or meeting, transcribes it, and races several AI models in parallel to put a well-formed answer on a private on-screen overlay — with the user's data kept on their own machine.",
@@ -37,8 +37,8 @@ export const productCaseStudies: CaseStudy[] = [
     stack: [
       "Electron (Windows NSIS installer, macOS DMG, Linux AppImage)",
       "Node.js + vanilla JavaScript renderer",
-      "electron-store (AES-256-CBC at rest), scrypt password hashing",
-      "OpenAI, Anthropic, Google Gemini, Groq, DeepSeek, Mistral, OpenRouter, GitHub Models",
+      "electron-store (local JSON), scrypt password hashing; license and GitHub tokens encrypted with DPAPI/Keychain",
+      "OpenAI, Anthropic, Google Gemini, Groq, DeepSeek, Mistral",
       "Managed API: Node.js 20, Express, Zod, Helmet, pino",
       "Google Cloud Run, Firestore, Secret Manager",
       "Stripe payments + webhooks",
@@ -74,14 +74,14 @@ export const productCaseStudies: CaseStudy[] = [
       {
         h2: "Architecture: a parallel model race",
         paragraphs: [
-          "With managed access, questions go to our API on Google Cloud Run. It holds the provider keys in Secret Manager, so users need no keys of their own and none ship in the app. Requests pick a tier — fast, balanced, or deep — and the server fires every configured provider model in that tier at once, returns the first valid answer (Promise.any), and cancels the rest with an AbortController. The public site describes this as a nine-model race; in code, the API integrates eight providers: OpenAI, Anthropic, Google Gemini, Groq, DeepSeek, Mistral, OpenRouter, and GitHub Models.",
+          "With managed access, questions go to our API on Google Cloud Run. It holds the provider keys in Secret Manager, so users need no keys of their own and none ship in the app. Requests pick a tier — fast, balanced, or deep — and the server fires every configured provider model in that tier at once, returns the first valid answer (Promise.any), and cancels the rest with an AbortController. The API races 12 server-pinned models from six providers in three tiers: OpenAI, Anthropic, Google Gemini, Groq, DeepSeek, and Mistral.",
           "Clients can't request arbitrary models — tiers map to server-pinned models — and output is capped at 4,096 tokens per call to bound cost. Access uses opaque bearer tokens checked against Firestore with a 60-second cache, rate limits apply per token and per plan, and Stripe webhooks activate, cancel, or refund tokens. Provider error messages are reduced to safe codes before logging, because they can echo request data.",
         ],
       },
       {
         h2: "Local-first privacy and security hardening",
         paragraphs: [
-          "The user's profile, conversations, transcripts, and knowledge base are stored on their own device in an encrypted store (AES-256-CBC), with passwords hashed using scrypt. The account server keeps only the basics needed for sign-in and billing.",
+          "The user's profile, conversations, transcripts, and knowledge base are stored on their own device, not on our servers; license and GitHub tokens are encrypted with the operating system's credential store, and passwords are hashed with scrypt. The account server keeps only the basics needed for sign-in and billing.",
           "The desktop app runs every window with context isolation, sandboxing, and Node integration off; the renderer reaches the main process only through an allowlisted IPC bridge. A tested SSRF guard blocks the URL-fetch feature from reaching local files, loopback, private networks, cloud metadata addresses, or URLs with embedded credentials, and saved HTML reports pass through a sanitizer. The API container runs as a non-root user, and the CI pipeline runs syntax checks, unit tests, npm audit, installer-content verification, and Docker builds.",
         ],
       },
@@ -96,7 +96,7 @@ export const productCaseStudies: CaseStudy[] = [
     results: [
       "Live at co-help.com; the current release is v5.11.1 for Windows 10/11 and macOS 11+.",
       "Scores 98/100 on our own website audit tool (measured September 21, 2026).",
-      "The live sitemap lists 15 URLs, and the homepage is served with a strict Content-Security-Policy and preload-ready HSTS.",
+      "The live sitemap lists 17 URLs, and the homepage is served with a strict Content-Security-Policy and preload-ready HSTS.",
       "114 commits in the desktop app repository between February 13 and September 11, 2026.",
     ],
     services: ["ai-development-services", "custom-software-development", "ai-agent-development"],
@@ -111,7 +111,7 @@ export const productCaseStudies: CaseStudy[] = [
       "How we built Justice Genie: a FastAPI + RAG app that answers from a user's own documents and cited public law, abstains when unsure, and runs mock hearings.",
     outcome: "Live at justicegenie.help; audit score raised from 77 to 94 after one day of security and SEO hardening.",
     intro:
-      "Justice Genie helps people who are representing themselves prepare their case. Users upload their documents and ask questions in plain English; every answer is grounded in those documents and cited public law — and when there's no source, it says so instead of guessing. It provides legal information for education and practice, not legal advice.",
+      "Justice Genie helps people who are representing themselves prepare their case. Users upload their documents and ask questions in plain English; answers are designed to be grounded in those documents and cited public law — and when there's no source, it says so instead of guessing. It provides legal information for education and practice, not legal advice.",
     liveUrl: "https://justicegenie.help/",
     liveLabel: "justicegenie.help",
     image: "justice-genie",
@@ -123,7 +123,7 @@ export const productCaseStudies: CaseStudy[] = [
       "Async SQLAlchemy 2.0 + Alembic; Neon PostgreSQL in production, SQLite in development",
       "Per-case vector index (NumPy) with keyword fallback",
       "PyMuPDF, python-docx, openpyxl, Pillow for document extraction",
-      "Anthropic, OpenAI, and Google Gemini with cross-provider fallback",
+      "Anthropic, OpenAI, and Google Gemini with cross-provider fallback, with Groq/OpenRouter backup routing",
       "argon2 password hashing + JWT",
       "Stripe subscriptions",
       "Docker; Electron shell for live-hearing audio capture",
@@ -175,7 +175,7 @@ export const productCaseStudies: CaseStudy[] = [
       "Live at justicegenie.help.",
       "Scores 94/100 on our own website audit tool as of September 21, 2026, up from 77 before that day's security and SEO hardening.",
       "Supports 23 case types and 54 jurisdictions, with answers that cite sources or abstain.",
-      "39 commits between June 24 and September 21, 2026.",
+      "Dozens of commits between June and September 2026.",
     ],
     services: ["ai-agent-development", "ai-development-services", "ai-security-audit"],
   },

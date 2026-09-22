@@ -227,7 +227,7 @@ export function ServicePage({ service }: { service: ServiceDef }) {
           <div className="sticky top-28 rounded-3xl border border-line bg-surface/70 p-7">
             <h2 className="font-display text-lg font-bold uppercase text-bone">Let's talk</h2>
             <p className="mt-3 text-sm leading-relaxed text-ash">
-              Tell us about your project and we'll get back to you within 24 hours. Every
+              Tell us about your project and we'll get back to you within one business day. Every
               engagement starts with a free discovery call.
             </p>
             <a

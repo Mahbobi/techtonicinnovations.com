@@ -72,8 +72,8 @@ https://www.techtonicinnovations.com/case-studies
 Each case study is written from the project's repository and live site; results list only verifiable facts.
 
 Our products (designed, built, and operated by Techtonic Innovations LLC):
-- Co-Help (https://co-help.com) — Electron desktop AI assistant for Windows and macOS: live transcription, a parallel race across AI providers via a managed Cloud Run API, local-first encrypted storage. https://www.techtonicinnovations.com/case-studies/co-help
-- Justice Genie (https://justicegenie.help) — FastAPI + RAG legal-information app for self-represented litigants: answers grounded in the user's documents and cited public law, abstains when unsure, mock-hearing practice mode. https://www.techtonicinnovations.com/case-studies/justice-genie
+- Co-Help (https://co-help.com) — Electron desktop AI assistant for Windows and macOS: live transcription, a parallel race across AI providers via a managed Cloud Run API, local-first storage. https://www.techtonicinnovations.com/case-studies/co-help
+- Justice Genie (https://justicegenie.help) — FastAPI + RAG legal-information app for self-represented litigants: answers designed to be grounded in the user's documents and cited public law, abstains when unsure, mock-hearing practice mode. https://www.techtonicinnovations.com/case-studies/justice-genie
 - NexGen QA (https://qa-automation.com) — multi-tenant AI testing platform with 35+ modules, a bring-your-own-key GitHub Actions runner, and an SSRF-hardened public website audit tool. https://www.techtonicinnovations.com/case-studies/nexgen-qa
 
 Client projects:
@@ -132,4 +132,4 @@ Q: How much does it cost to work with Techtonic Innovations?
 A: Pricing depends on scope, team size, and engagement model (fixed-scope project, dedicated team, or staff augmentation). We provide a transparent estimate after a free discovery call.
 
 Q: How do we get started?
-A: Use the contact form or email info@techtonicinnovations.com. We respond within 2–4 business hours and begin with a free discovery call.
+A: Use the contact form or email info@techtonicinnovations.com. We respond within one business day and begin with a free discovery call.

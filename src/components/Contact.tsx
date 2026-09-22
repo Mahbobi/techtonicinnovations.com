@@ -84,7 +84,7 @@ export function Contact() {
           </h2>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-ash">
             Ready to transform your business with intelligent software? Tell us about
-            your project and we'll get back to you within 24 hours.
+            your project and we'll get back to you within one business day.
           </p>
 
           <ul className="mt-10 space-y-4">
@@ -189,7 +189,7 @@ export function Contact() {
               )}
             </motion.button>
             <p className="mt-4 text-center text-xs text-ash-dim">
-              We typically respond within 2–4 business hours.
+              We typically respond within one business day.
             </p>
           </form>
         </motion.div>

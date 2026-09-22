@@ -78,6 +78,7 @@ export const privacySections: PrivacySection[] = [
     h2: "Global Privacy Control",
     paragraphs: [
       "We honor the Global Privacy Control (GPC) signal. If your browser sends GPC, we treat it as a request to opt out of the sale or sharing of your personal information and of targeted advertising. Because we don't sell or share personal information or use it for targeted advertising, nothing further changes when GPC is on — but the signal is respected, and it applies to the browser that sends it.",
+      "Do Not Track: there is no agreed standard, so we do not respond to DNT signals separately; we honor Global Privacy Control.",
     ],
   },
   {

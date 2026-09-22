@@ -18,6 +18,7 @@ export function LegalDocument({
   effectiveDate,
   operator,
   intro,
+  notice,
   sections,
   children,
 }: {
@@ -26,6 +27,8 @@ export function LegalDocument({
   effectiveDate: string;
   operator: string;
   intro?: string;
+  /** Important notice rendered as a bold, boxed callout below the intro. */
+  notice?: string;
   sections: LegalSection[];
   children?: ReactNode;
 }) {
@@ -48,6 +51,15 @@ export function LegalDocument({
           Effective {effectiveDate} · {operator}
         </p>
         {intro && <p className="mt-6 text-base leading-relaxed text-ash">{intro}</p>}
+        {notice && (
+          <aside
+            role="note"
+            aria-label="Important notice"
+            className="mt-6 rounded-2xl border-2 border-acid bg-surface/80 p-5 sm:p-6"
+          >
+            <p className="text-base font-bold leading-relaxed text-bone">{notice}</p>
+          </aside>
+        )}
       </header>
 
       <nav aria-label="Contents" className="mt-10 max-w-3xl rounded-2xl border border-line bg-surface/60 p-6">

@@ -331,7 +331,7 @@ export const operateServices: ServiceDef[] = [
       {
         h2: "Get started",
         paragraphs: [
-          `${DISCOVERY_CALL} Reach out through the contact form on this site or email ${SITE.email} — we respond within 2 to 4 business hours. ` +
+          `${DISCOVERY_CALL} Reach out through the contact form on this site or email ${SITE.email} — we respond within one business day. ` +
             TIMELINE_ANSWER,
         ],
       },
@@ -355,7 +355,7 @@ export const operateServices: ServiceDef[] = [
       },
       {
         q: "How do we get started?",
-        a: `Reach out through the contact form on this site or email ${SITE.email}. We respond within 2 to 4 business hours and begin every engagement with a free discovery call.`,
+        a: `Reach out through the contact form on this site or email ${SITE.email}. We respond within one business day and begin every engagement with a free discovery call.`,
       },
     ],
   },

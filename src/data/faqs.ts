@@ -36,6 +36,6 @@ export const faqs: Faq[] = [
   },
   {
     q: "How do we get started?",
-    a: "Reach out through the contact form on this site or email info@techtonicinnovations.com. We respond within 2 to 4 business hours and begin every engagement with a free discovery call to understand your goals.",
+    a: "Reach out through the contact form on this site or email info@techtonicinnovations.com. We respond within one business day and begin every engagement with a free discovery call to understand your goals.",
   },
 ];

@@ -55,7 +55,7 @@ export function ContactPage() {
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ash">
             Whether you're weighing an AI project, need a build team, or want vetted engineers
             on your team, the first step is a free discovery call. Tell us about your project
-            and we'll get back to you — we typically respond within 2–4 business hours.
+            and we'll get back to you — we typically respond within one business day.
           </p>
         </div>
 

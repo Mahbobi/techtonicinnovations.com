@@ -2,7 +2,13 @@ import { JsonLd } from "../components/JsonLd";
 import { LegalDocument } from "../components/LegalDocument";
 import { TERMS_ROUTE } from "../data/routes";
 import { SITE } from "../data/site";
-import { TERMS_EFFECTIVE_DATE, TERMS_OPERATOR, termsIntro, termsSections } from "../data/terms";
+import {
+  TERMS_EFFECTIVE_DATE,
+  TERMS_OPERATOR,
+  termsArbitrationNotice,
+  termsIntro,
+  termsSections,
+} from "../data/terms";
 import { useDocumentHead } from "../lib/head";
 import { breadcrumbJsonLd } from "../lib/jsonld";
 
@@ -16,6 +22,7 @@ export function TermsPage() {
       effectiveDate={TERMS_EFFECTIVE_DATE}
       operator={TERMS_OPERATOR}
       intro={termsIntro}
+      notice={termsArbitrationNotice}
       sections={termsSections}
     >
       <JsonLd data={breadcrumbJsonLd("Terms of Service", "/terms")} />
